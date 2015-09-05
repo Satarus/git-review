@@ -886,8 +886,9 @@ def assert_one_change(remote, branch, yes, have_hook):
                   "installed. Amending the commit to add a gerrit change id.")
         run_command("git commit --amend", GIT_EDITOR='true')
     elif output_lines == 0:
-        printwrap("No changes between HEAD and %s/%s. Submitting for review "
-                  "would be pointless." % (remote, branch))
+        printwrap("All your commits are already present on %s. If you pushed"
+                  "your commits to an upstream branch and not into review consider"
+                  "removing this branch and try git review %s again." % (remote, branch))
         sys.exit(1)
     elif output_lines > 1:
         if not yes:
